@@ -17,7 +17,7 @@ public class Main {
 	
 	public static void main(String[] args)
     {
-		System.out.println("initializing data \n.\n.\n");
+		System.out.println("initializing data \n.\n.\n.");
         // Generate data
         int arraySize = 32768;
         int arrayOfNumbers[] = new int[arraySize];
@@ -26,11 +26,11 @@ public class Main {
         System.out.println(".");
         
         Random rand = new Random();
-        for (int c = 0; c < arraySize; c++)
+        for (int c = 0; c < arrayOfNumbers.length; c++){
         	arrayOfNumbers[c] = rand.nextInt(maxNumber);
+        }
         
-        // !!! With this, the next loop runs faster
-        Arrays.sort(arrayOfNumbers);
+        //Arrays.sort(arrayOfNumbers);
         //worstPossibleCase(arrayOfNumbers, maxNumber);
         
         System.out.println("starting test \n . \n . \n .");
@@ -41,10 +41,16 @@ public class Main {
 
         for (int i = 0; i < 100000; ++i)
         {
-            for (int c = 0; c < arraySize; ++c)
+            for (int counter = 0; counter < arrayOfNumbers.length; ++counter)
             {
-                if (arrayOfNumbers[c] >= maxNumber/2)
-                    sum += arrayOfNumbers[c];
+            	//the next two lines are for the if statement
+            	//if (arrayOfNumbers[counter] >= maxNumber/2)
+                //  sum += arrayOfNumbers[counter];
+            	
+            	//the next two lines is for the code to run without if statement
+            	//without if statement
+                int t = (arrayOfNumbers[counter] - maxNumber/2) >> 31;
+               	sum += (~t) & arrayOfNumbers[counter];
             }
         }
 
